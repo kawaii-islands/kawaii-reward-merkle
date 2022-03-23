@@ -107,6 +107,8 @@ const addresses = [
   "0xa5e98636aad92d2b747516d351f15e12af8c509d",
   "0x5be53bbccc02d6ca3c988eaf74afa934b58aae41",
   "0xe378fc973578f5619d2fb4ffcf92c7210a8f2243",
+  "0x7bcf48ee0a114942eecbe4410e7c07aa58fad803",
+  "0x6d4306ce5eb24cc18799cfbc2636eee8c3941689",
 ];
 
 const getProof = catchAsync(async (req, res) => {
