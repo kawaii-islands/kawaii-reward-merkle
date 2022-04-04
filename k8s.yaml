@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: kawaii-reward-merkle
-          image: kawaiiislands/kawaii-reward-merkle:1.0.2
+          image: kawaiiislands/kawaii-reward-merkle:1.0.3
           imagePullPolicy: Always
           ports:
             - containerPort: 3000
