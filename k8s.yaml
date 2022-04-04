@@ -1,0 +1,87 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: kawaii-reward-merkle
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kawaii-reward-merkle
+  template:
+    metadata:
+      labels:
+        app: kawaii-reward-merkle
+    spec:
+      containers:
+        - name: kawaii-reward-merkle
+          image: kawaiiislands/kawaii-reward-merkle:1.0.2
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+          env:
+            - name: NODE_ENV
+              valueFrom:
+                secretKeyRef:
+                  name: kawaii-reward-merkle.env
+                  key: nodeEnv
+            - name: PORT
+              valueFrom:
+                secretKeyRef:
+                  name: kawaii-reward-merkle.env
+                  key: port
+            - name: MONGODB_URL
+              valueFrom:
+                secretKeyRef:
+                  name: kawaii-reward-merkle.env
+                  key: mongodbUrl
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: kawaii-reward-merkle.env
+                  key: jwtSecret
+            - name: JWT_ACCESS_EXPIRATION_MINUTES
+              valueFrom:
+                secretKeyRef:
+                  name: kawaii-reward-merkle.env
+                  key: jwtAccessExpirationMinutes
+            - name: JWT_REFRESH_EXPIRATION_DAYS
+              valueFrom:
+                secretKeyRef:
+                  name: kawaii-reward-merkle.env
+                  key: jwtRefreshExpirationDays
+      imagePullSecrets:
+        - name: docker-secret
+      restartPolicy: Always
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: kawaii-reward-merkle
+spec:
+  type: ClusterIP
+  ports:
+    - port: 3000
+      protocol: TCP
+  selector:
+    app: kawaii-reward-merkle
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kawaii-reward-merkle
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+    - host: developers.kawaii.global
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/reward-merkle"
+            backend:
+              service:
+                name: kawaii-reward-merkle
+                port:
+                  number: 3000
