@@ -4,7 +4,7 @@ const airdropRoute = require('./airdrop.route');
 
 const router = express.Router();
 
-router.use('/', rewardRoute);
+router.use('/reward', rewardRoute);
 router.use('/airdrop', airdropRoute);
 
 module.exports = router;
