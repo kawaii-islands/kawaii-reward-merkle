@@ -7,6 +7,7 @@ spec:
   selector:
     matchLabels:
       app: kawaii-reward-merkle
+  revisionHistoryLimit: 5
   template:
     metadata:
       labels:
