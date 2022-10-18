@@ -3,7 +3,7 @@ const { soliditySha3 } = require('web3-utils');
 const catchAsync = require('../utils/catchAsync');
 const apiResponse = require('../utils/apiResponse');
 const Reward = require('../models/reward.model');
-const RewardKawaii = require('../models/reward.model');
+const RewardKawaii = require('../models/rewardKawaii.model');
 const RewardIsland = require('../models/rewardIsland.model');
 
 const getProof = catchAsync(async (req, res) => {
