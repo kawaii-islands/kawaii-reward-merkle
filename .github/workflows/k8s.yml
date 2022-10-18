@@ -37,7 +37,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: kawaiiislands/kawaii-reward-merkle:1.1.0
+          tags: kawaiiislands/kawaii-reward-merkle:1.1.1
 
   deploy:
     name: Deploy
