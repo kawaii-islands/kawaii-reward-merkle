@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: kawaii-reward-merkle
-          image: kawaiiislands/kawaii-reward-merkle:1.1.2
+          image: kawaiiislands/kawaii-reward-merkle:$DOCKER_IMAGE_VERSION
           imagePullPolicy: Always
           ports:
             - containerPort: 3000
@@ -24,32 +24,17 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: kawaii-reward-merkle.env
-                  key: nodeEnv
+                  key: NODE_ENV
             - name: PORT
               valueFrom:
                 secretKeyRef:
                   name: kawaii-reward-merkle.env
-                  key: port
+                  key: PORT
             - name: MONGODB_URL
               valueFrom:
                 secretKeyRef:
                   name: kawaii-reward-merkle.env
-                  key: mongodbUrl
-            - name: JWT_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: kawaii-reward-merkle.env
-                  key: jwtSecret
-            - name: JWT_ACCESS_EXPIRATION_MINUTES
-              valueFrom:
-                secretKeyRef:
-                  name: kawaii-reward-merkle.env
-                  key: jwtAccessExpirationMinutes
-            - name: JWT_REFRESH_EXPIRATION_DAYS
-              valueFrom:
-                secretKeyRef:
-                  name: kawaii-reward-merkle.env
-                  key: jwtRefreshExpirationDays
+                  key: MONGODB_URL
       imagePullSecrets:
         - name: docker-secret
       restartPolicy: Always
